@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "OneTab",
+  "description": "Focus an existing matching tab instead of opening a duplicate.",
+  "version": "1.0.0",
+  "permissions": ["scripting", "storage", "tabs"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "scripts": ["background.js"],
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "OneTab rules",
+    "default_popup": "popup.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "one-tab@dkarter.dev",
+      "strict_min_version": "121.0"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneTab rules</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">OneTab</p>
+        <h1>One resource.<br>One tab.</h1>
+        <p class="intro">
+          Define the URLs that should stay unique. Everything else is left untouched.
+        </p>
+      </header>
+
+      <section aria-labelledby="rules-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Matching rules</p>
+            <h2 id="rules-heading">Your routes</h2>
+          </div>
+          <button id="add-rule" class="primary" type="button">Add rule</button>
+        </div>
+
+        <div id="empty-state" class="empty-state">
+          <strong>No rules yet.</strong>
+          Add one to start keeping a URL unique.
+        </div>
+        <div id="rules" class="rules"></div>
+      </section>
+
+      <aside>
+        <p class="eyebrow">Pattern guide</p>
+        <code>/:owner/:repo/pull/:number/**</code>
+        <p>
+          Named segments and <code>*</code> match one path segment. A trailing <code>/**</code>
+          matches and ignores all deeper paths. Only URLs covered by a rule are deduplicated. Saving
+          an enabled rule requests click access only for its base site.
+        </p>
+      </aside>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+    </main>
+
+    <template id="rule-template">
+      <form class="rule">
+        <div class="rule-topline">
+          <label class="name-field">
+            <span>Rule name</span>
+            <input name="name" type="text" placeholder="GitHub pull requests" required>
+          </label>
+          <div class="rule-top-actions">
+            <label class="check rule-toggle">
+              <input name="enabled" type="checkbox" checked>
+              <span>Enabled</span>
+            </label>
+            <button class="remove" type="button" aria-label="Remove rule">Remove</button>
+          </div>
+        </div>
+
+        <div class="route-fields">
+          <label>
+            <span>Base URL</span>
+            <input name="baseUrl" type="url" placeholder="https://github.com" required>
+          </label>
+          <span class="join" aria-hidden="true">+</span>
+          <label>
+            <span>Path pattern</span>
+            <input
+              name="pathPattern"
+              type="text"
+              placeholder="/:owner/:repo/pull/:number/**"
+              required
+            >
+          </label>
+        </div>
+
+        <fieldset>
+          <legend>Ignore when comparing</legend>
+          <label class="check">
+            <input name="ignoreQuery" type="checkbox" checked>
+            <span>Query string</span>
+          </label>
+          <label class="check">
+            <input name="ignoreHash" type="checkbox" checked>
+            <span>Anchor / fragment</span>
+          </label>
+        </fieldset>
+
+        <div class="rule-actions">
+          <span class="error" role="alert"></span>
+          <button class="save" type="submit">Save rule</button>
+        </div>
+      </form>
+    </template>
+
+    <script src="options.js"></script>
+  </body>
+</html>

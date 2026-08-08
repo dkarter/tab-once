@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneTab rules</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="eyebrow">OneTab</p>
+        <h1>Active routes</h1>
+      </div>
+      <span class="mark" aria-hidden="true">1</span>
+    </header>
+
+    <main>
+      <p id="popup-empty" class="empty">No rules configured.</p>
+      <div id="popup-rules" class="rules"></div>
+      <p id="popup-status" class="status" aria-live="polite"></p>
+    </main>
+
+    <footer>
+      <button id="open-options" type="button">Open full settings <span>&nearr;</span></button>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
