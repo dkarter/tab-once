@@ -24,6 +24,7 @@
     "**/*-lock.json",
     "aube-lock.yaml",
     "artifacts/**",
+    "CHANGELOG.md",
     "deps/**",
     "dist/**",
     "build/**",
