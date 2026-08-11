@@ -10,6 +10,7 @@ const manifest = JSON.parse(manifestContent) as {
   manifest_version: number;
   version: string;
   background?: { scripts?: string[]; service_worker?: string };
+  browser_specific_settings?: { gecko?: { strict_min_version?: string } };
 };
 const releaseManifest = JSON.parse(releaseManifestContent) as Record<string, string>;
 
@@ -25,4 +26,7 @@ if (
   || !manifest.background.scripts?.includes("background.js")
 ) {
   throw new Error("Both Chromium and Firefox background declarations are required.");
+}
+if (manifest.browser_specific_settings?.gecko?.strict_min_version !== "142.0") {
+  throw new Error("Firefox 142 or newer is required by the declared manifest properties.");
 }

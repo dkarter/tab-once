@@ -2,8 +2,9 @@
 
 Release Please maintains the release pull request, `CHANGELOG.md`, `package.json`, and the
 extension manifest version. Merging that pull request creates a GitHub release and starts the
-Chrome and Firefox publishing jobs in parallel. Each release includes the store archive, reviewer
-source archive, and SHA-256 checksums generated from the tagged commit.
+Chrome and Firefox publishing jobs in parallel. Each release includes browser-specific Chrome and
+Firefox archives, the reviewer source archive, and SHA-256 checksums generated from the tagged
+commit.
 
 ## GitHub
 

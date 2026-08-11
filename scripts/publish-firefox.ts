@@ -50,10 +50,15 @@ const addonId = manifest.browser_specific_settings?.gecko?.id;
 if (!addonId) throw new Error("The Firefox add-on ID is missing from dist/manifest.json.");
 const api = "https://addons.mozilla.org/api/v5/addons/";
 const authorization = () => createAuthorization(issuer, secret);
-const archive = await readFile("artifacts/tab-once.zip");
+const archive = await readFile("artifacts/tab-once-firefox.zip");
 const uploadForm = new FormData();
 uploadForm.set("channel", "listed");
-uploadForm.set("upload", new File([archive], "tab-once.zip", { type: "application/zip" }));
+uploadForm.set(
+  "upload",
+  new File([archive], "tab-once-firefox.zip", {
+    type: "application/zip",
+  }),
+);
 const upload = await requestJson(
   `${api}upload/`,
   authorization,

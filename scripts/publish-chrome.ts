@@ -73,7 +73,7 @@ const authorization = { Authorization: `Bearer ${token.access_token}` };
 const itemPath = `publishers/${encodeURIComponent(publisherId)}/items/${
   encodeURIComponent(extensionId)
 }`;
-const packageBytes = await readFile("artifacts/tab-once.zip");
+const packageBytes = await readFile("artifacts/tab-once-chrome.zip");
 const uploadResult = await requestJson(
   `https://chromewebstore.googleapis.com/upload/v2/${itemPath}:upload`,
   {
