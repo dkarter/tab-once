@@ -1,6 +1,6 @@
-# OneTab
+# TabOnce
 
-OneTab is a Manifest V3 browser extension that focuses an existing matching tab instead of
+TabOnce is a Manifest V3 browser extension that focuses an existing matching tab instead of
 leaving a duplicate open. It is opt-in: URLs are only deduplicated when they match a rule you
 define.
 
@@ -35,11 +35,11 @@ Path pattern: /:dashboard/**
 Rules are checked in displayed order. The first matching rule determines a URL's identity.
 
 Enabled rules can also intercept ordinary same-tab link clicks on their base site. When the
-destination is already open, OneTab leaves the current page untouched and focuses the existing
+destination is already open, TabOnce leaves the current page untouched and focuses the existing
 tab. If no matching tab exists, navigation proceeds normally. Site access is optional and
 requested separately for each configured origin.
 
-Tabs opened as new tabs are handled separately: when a matching tab already exists, OneTab closes
+Tabs opened as new tabs are handled separately: when a matching tab already exists, TabOnce closes
 the new duplicate and focuses the existing tab. Automatic duplicate closure never applies to a
 navigation in an established tab.
 
@@ -78,6 +78,13 @@ for permanent installation.
 Source changes are not automatically reflected in a loaded extension. After making changes:
 
 1. Run `mise run build` to regenerate `dist`.
-2. In Helium or Chromium, choose **Reload** for OneTab on `chrome://extensions`.
-3. In Firefox or Zen, choose **Reload** for OneTab on
+2. In Helium or Chromium, choose **Reload** for TabOnce on `chrome://extensions`.
+3. In Firefox or Zen, choose **Reload** for TabOnce on
    `about:debugging#/runtime/this-firefox`.
+
+## Releases
+
+Release Please manages semantic versions, changelog entries, and GitHub releases from
+Conventional Commits. Store publication runs automatically after a release pull request is
+merged. See [Publishing Setup](docs/publishing.md) for the required store accounts and GitHub
+secrets.

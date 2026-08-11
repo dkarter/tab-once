@@ -1,11 +1,13 @@
 [tools]
 "github:crate-ci/committed" = "latest"
+actionlint = "1.7.12"
 aube = "1.29.1"
 dprint = "latest"
 gitleaks = "latest"
 lefthook = "latest"
 node = "lts"
 pitchfork = "latest"
+resvg = "0.48.1"
 
 [hooks]
 postinstall = "lefthook install"
@@ -23,8 +25,56 @@ description = "Builds the browser extension"
 run = "aube run build"
 
 [tasks.check]
-description = "Runs type checking, tests, formatting, and a production build"
-depends = ["typecheck", "test", "fmt-check", "build"]
+description = "Runs all project checks"
+depends = [
+  "audit",
+  "build",
+  "deps-check",
+  "fmt-check",
+  "manifest-check",
+  "test",
+  "typecheck",
+  "workflow-check",
+]
+
+[tasks.audit]
+description = "Checks dependencies for known vulnerabilities"
+run = "aube audit"
+
+[tasks.deps-check]
+description = "Checks the installed dependency tree"
+run = "aube check"
+
+[tasks."deps:install"]
+description = "Installs dependencies from the frozen lockfile"
+run = "aube ci"
+
+[tasks.manifest-check]
+description = "Checks release and extension manifest metadata"
+run = "aube exec tsx scripts/check-manifest.ts"
+
+[tasks.package]
+description = "Builds store and source archives"
+depends = ["build"]
+run = "aube exec tsx scripts/package.ts"
+
+[tasks."publish:chrome"]
+description = "Publishes the built extension to the Chrome Web Store"
+depends = ["package"]
+run = "mise run submit:chrome"
+
+[tasks."publish:firefox"]
+description = "Submits the built extension to Firefox Add-ons"
+depends = ["package"]
+run = "mise run submit:firefox"
+
+[tasks."submit:chrome"]
+description = "Submits prepared artifacts to the Chrome Web Store"
+run = "aube exec tsx scripts/publish-chrome.ts"
+
+[tasks."submit:firefox"]
+description = "Submits prepared artifacts to Firefox Add-ons"
+run = "aube exec tsx scripts/publish-firefox.ts"
 
 [tasks.test]
 description = "Runs unit tests"
@@ -33,3 +83,7 @@ run = "aube test"
 [tasks.typecheck]
 description = "Checks TypeScript types"
 run = "aube run typecheck"
+
+[tasks.workflow-check]
+description = "Checks GitHub Actions workflows"
+run = "actionlint"

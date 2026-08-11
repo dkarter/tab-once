@@ -3,7 +3,7 @@ import { getOriginPattern, getUrlKey, type UrlRule } from "./rules.js";
 import { loadRules } from "./storage.js";
 import { webExtension } from "./web-extension.js";
 
-const CLICK_INTERCEPTOR_ID = "one-tab-click-interceptor";
+const CLICK_INTERCEPTOR_ID = "tab-once-click-interceptor";
 const newlyCreatedTabs = new Set<number>();
 const pendingUrls = new Map<number, string>();
 const processingUrls = new Map<number, string>();
@@ -112,7 +112,7 @@ function queueInterceptorSync(): void {
   interceptorSync = interceptorSync
     .catch(() => undefined)
     .then(synchronizeClickInterceptor)
-    .catch((error) => console.warn("OneTab could not update click interception.", error));
+    .catch((error) => console.warn("TabOnce could not update click interception.", error));
 }
 
 async function deduplicateTab(tabId: number, url: string): Promise<void> {
@@ -155,7 +155,7 @@ async function processTab(tabId: number): Promise<void> {
       processingUrls.delete(tabId);
     }
   } catch (error) {
-    console.warn("OneTab could not process a tab update.", error);
+    console.warn("TabOnce could not process a tab update.", error);
   } finally {
     processingUrls.delete(tabId);
     if (pendingUrls.has(tabId)) void processTab(tabId);

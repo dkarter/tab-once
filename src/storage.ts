@@ -2,7 +2,7 @@ import { parseUrlRule, type UrlRule } from "./rules.js";
 import { webExtension } from "./web-extension.js";
 
 const STORAGE_KEY = "rules";
-const STORAGE_LOCK = "one-tab-rules";
+const STORAGE_LOCK = "tab-once-rules";
 
 export async function loadRules(): Promise<UrlRule[]> {
   const result = await webExtension.storage.sync.get(STORAGE_KEY);

@@ -15,5 +15,26 @@ commit-msg:
 pre-push:
   parallel: true
   jobs:
-    - name: Check project
-      run: mise run check
+    - name: Audit dependencies
+      run: mise run audit
+
+    - name: Build extension
+      run: mise run build
+
+    - name: Check dependencies
+      run: mise run deps-check
+
+    - name: Check formatting
+      run: mise run fmt-check
+
+    - name: Check manifests
+      run: mise run manifest-check
+
+    - name: Run tests
+      run: mise run test
+
+    - name: Check types
+      run: mise run typecheck
+
+    - name: Check workflows
+      run: mise run workflow-check

@@ -23,6 +23,7 @@
     "**/node_modules",
     "**/*-lock.json",
     "aube-lock.yaml",
+    "artifacts/**",
     "deps/**",
     "dist/**",
     "build/**",

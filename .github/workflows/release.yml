@@ -1,0 +1,118 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      sha: ${{ steps.release.outputs.sha }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - name: Create or update release
+        id: release
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || github.token }}
+
+  package:
+    if: needs.release.outputs.release_created == 'true'
+    needs: release
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Check out release
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.release.outputs.sha }}
+
+      - name: Install tools
+        uses: jdx/mise-action@v4.2.4 # Immutable release tag verified 2026-08-08.
+
+      - name: Install dependencies
+        run: mise run deps:install
+
+      - name: Build release archives
+        run: |
+          mise run package
+          sha256sum artifacts/*.zip > artifacts/SHA256SUMS
+
+      - name: Attach release assets
+        run: gh release upload "$TAG_NAME" artifacts/* --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ needs.release.outputs.tag_name }}
+
+  publish-chrome:
+    if: needs.release.outputs.release_created == 'true'
+    needs: [release, package]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Check out release
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.release.outputs.sha }}
+
+      - name: Install tools
+        uses: jdx/mise-action@v4.2.4 # Immutable release tag verified 2026-08-08.
+
+      - name: Install dependencies
+        run: mise run deps:install
+
+      - name: Download release archives
+        run: gh release download "$TAG_NAME" --pattern "tab-once*.zip" --dir artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ needs.release.outputs.tag_name }}
+
+      - name: Publish Chrome extension
+        run: mise run submit:chrome
+        env:
+          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          CHROME_PUBLISHER_ID: ${{ secrets.CHROME_PUBLISHER_ID }}
+          CHROME_SERVICE_ACCOUNT_JSON: ${{ secrets.CHROME_SERVICE_ACCOUNT_JSON }}
+
+  publish-firefox:
+    if: needs.release.outputs.release_created == 'true'
+    needs: [release, package]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Check out release
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.release.outputs.sha }}
+
+      - name: Install tools
+        uses: jdx/mise-action@v4.2.4 # Immutable release tag verified 2026-08-08.
+
+      - name: Install dependencies
+        run: mise run deps:install
+
+      - name: Download release archives
+        run: gh release download "$TAG_NAME" --pattern "tab-once*.zip" --dir artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ needs.release.outputs.tag_name }}
+
+      - name: Publish Firefox extension
+        run: mise run submit:firefox
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
