@@ -53,6 +53,17 @@ aube install
 mise run check
 ```
 
+Run the real-browser duplicate-tab test in both Chrome and Firefox with:
+
+```sh
+mise run e2e
+```
+
+The E2E harness uses Selenium Manager to provision missing browsers and drivers, builds an isolated
+test extension with a localhost rule, and verifies that navigating a settled blank tab to an already
+open matching URL closes the duplicate and returns focus to the original tab. Pass `chrome` or
+`firefox` to the package script to run one browser, for example `aube run e2e -- firefox`.
+
 To load the extension in Helium, Chrome, or another Chromium browser:
 
 1. Run `mise run build`.

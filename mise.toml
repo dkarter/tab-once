@@ -49,6 +49,18 @@ run = "aube audit"
 description = "Checks the installed dependency tree"
 run = "aube check"
 
+[tasks.e2e]
+description = "Tests duplicate-tab behavior in Chrome and Firefox"
+run = "aube run e2e"
+
+[tasks."e2e:chrome"]
+description = "Tests duplicate-tab behavior in Chrome"
+run = "aube run e2e -- chrome"
+
+[tasks."e2e:firefox"]
+description = "Tests duplicate-tab behavior in Firefox"
+run = "aube run e2e -- firefox"
+
 [tasks."deps:install"]
 description = "Installs dependencies from the frozen lockfile"
 run = "aube ci"

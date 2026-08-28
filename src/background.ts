@@ -1,6 +1,7 @@
 import { type FocusExistingTabResponse, isFocusExistingTabRequest } from "./messages.js";
 import { getOriginPattern, getUrlKey, type UrlRule } from "./rules.js";
 import { loadRules } from "./storage.js";
+import { shouldStopTrackingNewTab } from "./tab-lifecycle.js";
 import { webExtension } from "./web-extension.js";
 
 const CLICK_INTERCEPTOR_ID = "tab-once-click-interceptor";
@@ -175,10 +176,13 @@ webExtension.tabs.onCreated.addListener((tab) => {
   if (url) queueTab(tab.id, url);
 });
 
-webExtension.tabs.onUpdated.addListener((tabId, changeInfo) => {
+webExtension.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (!newlyCreatedTabs.has(tabId)) return;
   if (changeInfo.url) queueTab(tabId, changeInfo.url);
-  if (changeInfo.status === "complete") newlyCreatedTabs.delete(tabId);
+  const currentUrl = tab.pendingUrl ?? tab.url;
+  if (shouldStopTrackingNewTab(changeInfo.status, currentUrl)) {
+    newlyCreatedTabs.delete(tabId);
+  }
 });
 
 webExtension.tabs.onRemoved.addListener((tabId) => {

@@ -1,17 +1,9 @@
 import JSZip from "jszip";
 import { mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
+import { type ExtensionManifest, getBrowserManifest } from "./extension-build.js";
 
 const artifactsDirectory = "artifacts";
-interface StoreManifest {
-  background: {
-    scripts?: string[];
-    service_worker?: string;
-    [key: string]: unknown;
-  };
-  browser_specific_settings?: unknown;
-  [key: string]: unknown;
-}
 
 const sourceEntries = [
   ".github",
@@ -62,12 +54,9 @@ async function createArchive(
 
 await rm(artifactsDirectory, { recursive: true, force: true });
 await mkdir(artifactsDirectory, { recursive: true });
-const manifest = JSON.parse(await readFile("dist/manifest.json", "utf8")) as StoreManifest;
-const chromeManifest = structuredClone(manifest);
-delete chromeManifest.background.scripts;
-delete chromeManifest.browser_specific_settings;
-const firefoxManifest = structuredClone(manifest);
-delete firefoxManifest.background.service_worker;
+const manifest = JSON.parse(await readFile("dist/manifest.json", "utf8")) as ExtensionManifest;
+const chromeManifest = getBrowserManifest(manifest, "chrome");
+const firefoxManifest = getBrowserManifest(manifest, "firefox");
 const distEntries = await readdir("dist");
 
 await Promise.all([
