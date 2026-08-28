@@ -1,5 +1,6 @@
 [tools]
 "github:crate-ci/committed" = "latest"
+"cargo:resvg" = { version = "0.47.0", features = ["text", "system-fonts", "memmap-fonts", "raster-images"] }
 actionlint = "1.7.12"
 aube = "1.29.1"
 dprint = "latest"
@@ -7,7 +8,6 @@ gitleaks = "latest"
 lefthook = "latest"
 node = "lts"
 pitchfork = "latest"
-resvg = "0.48.1"
 
 [hooks]
 postinstall = "lefthook install"
@@ -23,6 +23,10 @@ run = "dprint check"
 [tasks.build]
 description = "Builds the browser extension"
 run = "aube run build"
+
+[tasks."icons:generate"]
+description = "Regenerates committed PNG icons from public/icon.svg"
+run = "aube exec tsx scripts/generate-icons.ts"
 
 [tasks.check]
 description = "Runs all project checks"

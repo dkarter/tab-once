@@ -63,6 +63,12 @@ To load the extension in Helium, Chrome, or another Chromium browser:
 
 The toolbar button opens the quick rule toggle popup, which links to the full options page.
 
+To regenerate the committed PNG icons after changing `public/icon.svg`, run:
+
+```sh
+mise run icons:generate
+```
+
 To load the extension temporarily in Firefox or Zen:
 
 1. Run `mise run build`.
