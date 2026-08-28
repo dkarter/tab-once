@@ -4,7 +4,7 @@ Release Please maintains the release pull request, `CHANGELOG.md`, `package.json
 extension manifest version. Merging that pull request creates a GitHub release and starts the
 Chrome and Firefox publishing jobs in parallel. Each release includes browser-specific Chrome and
 Firefox archives, the reviewer source archive, and SHA-256 checksums generated from the tagged
-commit.
+commit. Releases remain drafts until all assets are attached, then become immutable when published.
 
 ## GitHub
 

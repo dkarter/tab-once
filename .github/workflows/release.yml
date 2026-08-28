@@ -48,8 +48,10 @@ jobs:
           mise run package
           sha256sum artifacts/*.zip > artifacts/SHA256SUMS
 
-      - name: Attach release assets
-        run: gh release upload "$TAG_NAME" artifacts/* --clobber
+      - name: Attach release assets and publish
+        run: |
+          gh release upload "$TAG_NAME" artifacts/* --clobber
+          gh release edit "$TAG_NAME" --draft=false
         env:
           GH_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ needs.release.outputs.tag_name }}
