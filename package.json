@@ -2,6 +2,7 @@
   "name": "tab-once",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "Focus an existing matching browser tab instead of opening a duplicate.",
   "packageManager": "aube@1.29.1",
   "type": "module",
