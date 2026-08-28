@@ -43,11 +43,11 @@ async function requestJson(
 
 const issuer = requireEnvironment("AMO_JWT_ISSUER");
 const secret = requireEnvironment("AMO_JWT_SECRET");
-const manifest = JSON.parse(await readFile("dist/manifest.json", "utf8")) as {
+const manifest = JSON.parse(await readFile("public/manifest.json", "utf8")) as {
   browser_specific_settings?: { gecko?: { id?: string } };
 };
 const addonId = manifest.browser_specific_settings?.gecko?.id;
-if (!addonId) throw new Error("The Firefox add-on ID is missing from dist/manifest.json.");
+if (!addonId) throw new Error("The Firefox add-on ID is missing from public/manifest.json.");
 const api = "https://addons.mozilla.org/api/v5/addons/";
 const authorization = () => createAuthorization(issuer, secret);
 const archive = await readFile("artifacts/tab-once-firefox.zip");
