@@ -80,6 +80,16 @@ run = "aube exec tsx scripts/publish-chrome.ts"
 description = "Submits prepared artifacts to Firefox Add-ons"
 run = "aube exec tsx scripts/publish-firefox.ts"
 
+[tasks."secrets:firefox"]
+description = "Configures Firefox publishing secrets in GitHub Actions"
+run = '''
+printf '\nAMO_JWT_ISSUER: Paste the AMO API key / JWT issuer.\n'
+gh secret set AMO_JWT_ISSUER --app actions
+printf '\nAMO_JWT_SECRET: Paste the AMO API secret.\n'
+gh secret set AMO_JWT_SECRET --app actions
+gh secret list --app actions
+'''
+
 [tasks.test]
 description = "Runs unit tests"
 run = "aube test"
