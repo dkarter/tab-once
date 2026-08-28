@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/dkarter/tab-once/compare/v1.1.0...v1.1.1) (2026-08-28)
+
+
+### Bug Fixes
+
+* read firefox id from source manifest ([e19e486](https://github.com/dkarter/tab-once/commit/e19e486d025d64810221dbb868234b6141713641))
+
 ## [1.1.0](https://github.com/dkarter/tab-once/compare/v1.0.0...v1.1.0) (2026-08-28)
 
 
