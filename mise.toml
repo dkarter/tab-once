@@ -92,6 +92,18 @@ run = "aube exec tsx scripts/publish-chrome.ts"
 description = "Submits prepared artifacts to Firefox Add-ons"
 run = "aube exec tsx scripts/publish-firefox.ts"
 
+[tasks."secrets:chrome"]
+description = "Configures Chrome publishing secrets in GitHub Actions"
+run = '''
+printf '\nCHROME_EXTENSION_ID: Paste the Chrome Web Store item ID.\n'
+gh secret set CHROME_EXTENSION_ID --app actions
+printf '\nCHROME_PUBLISHER_ID: Paste the publisher ID from Publisher > Settings.\n'
+gh secret set CHROME_PUBLISHER_ID --app actions
+printf '\nCHROME_SERVICE_ACCOUNT_JSON: Paste the complete service-account JSON key.\n'
+gh secret set CHROME_SERVICE_ACCOUNT_JSON --app actions
+gh secret list --app actions
+'''
+
 [tasks."secrets:firefox"]
 description = "Configures Firefox publishing secrets in GitHub Actions"
 run = '''
