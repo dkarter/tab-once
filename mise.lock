@@ -98,9 +98,9 @@ url_api = "https://api.github.com/repos/jdx/aube/releases/assets/479769257"
 provenance = "github-attestations"
 
 [[tools."cargo:resvg"]]
-version = "0.47.0"
+version = "0.48.1"
 backend = "cargo:resvg"
-specifiers = ["0.47.0"]
+specifiers = ["0.48.1"]
 
 [tools."cargo:resvg".options]
 features = "text system-fonts memmap-fonts raster-images"
