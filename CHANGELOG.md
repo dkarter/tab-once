@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/dkarter/tab-once/compare/v1.1.2...v1.2.0) (2026-08-30)
+
+
+### Features
+
+* link settings to source code ([5ef704b](https://github.com/dkarter/tab-once/commit/5ef704bd1a63ee99bcf7bff791207328f0d3769b))
+
 ## [1.1.2](https://github.com/dkarter/tab-once/compare/v1.1.1...v1.1.2) (2026-08-28)
 
 
