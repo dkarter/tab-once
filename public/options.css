@@ -74,6 +74,18 @@ h2 {
   line-height: 1.7;
 }
 
+.source-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #1f5b41;
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+
+.source-link:hover {
+  color: #8a3428;
+}
+
 .eyebrow,
 label > span,
 legend {
