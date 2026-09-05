@@ -2,7 +2,7 @@
 "github:crate-ci/committed" = "latest"
 "cargo:resvg" = { version = "0.47.0", features = ["text", "system-fonts", "memmap-fonts", "raster-images"] }
 actionlint = "1.7.12"
-aube = "1.29.1"
+aube = "v2.2.9"
 dprint = "latest"
 gitleaks = "latest"
 lefthook = "latest"
