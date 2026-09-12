@@ -1,6 +1,6 @@
 [tools]
 "github:crate-ci/committed" = "latest"
-"cargo:resvg" = { version = "0.47.0", features = ["text", "system-fonts", "memmap-fonts", "raster-images"] }
+"cargo:resvg" = { version = "0.48.1", features = ["text", "system-fonts", "memmap-fonts", "raster-images"] }
 actionlint = "1.7.12"
 aube = "1.29.1"
 dprint = "latest"
