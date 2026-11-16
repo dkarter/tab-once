@@ -105,3 +105,7 @@ Release Please manages semantic versions, changelog entries, and GitHub releases
 Conventional Commits. Store publication runs automatically after a release pull request is
 merged. See [Publishing Setup](docs/publishing.md) for the required store accounts and GitHub
 secrets.
+
+## License
+
+[MIT](LICENSE)

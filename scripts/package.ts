@@ -10,6 +10,7 @@ const sourceEntries = [
   ".gitignore",
   ".release-please-manifest.json",
   "CHANGELOG.md",
+  "LICENSE",
   "README.md",
   "aube-lock.yaml",
   "committed.toml",
