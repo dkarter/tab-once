@@ -315,8 +315,20 @@ checksum = "sha256:f3917d35991bb5c1bcb9e0f40f21ade55c2b9d2a81c580e8035ea5cbf24d2
 url = "https://github.com/jdx/pitchfork/releases/download/v2.23.0/pitchfork-aarch64-unknown-linux-gnu.tar.gz"
 url_api = "https://api.github.com/repos/jdx/pitchfork/releases/assets/530648398"
 
+[tools.pitchfork."platforms.linux-arm64-musl"]
+checksum = "sha256:f3917d35991bb5c1bcb9e0f40f21ade55c2b9d2a81c580e8035ea5cbf24d2820"
+checksum_source = "mise-versions"
+url = "https://github.com/jdx/pitchfork/releases/download/v2.23.0/pitchfork-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jdx/pitchfork/releases/assets/530648398"
+
 [tools.pitchfork."platforms.linux-x64"]
 checksum = "sha256:e2d932de87fbf1faeec38ea2b1534bedaf305938456f92fdd35cabeb17ea79ca"
+url = "https://github.com/jdx/pitchfork/releases/download/v2.23.0/pitchfork-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/jdx/pitchfork/releases/assets/530647237"
+
+[tools.pitchfork."platforms.linux-x64-musl"]
+checksum = "sha256:e2d932de87fbf1faeec38ea2b1534bedaf305938456f92fdd35cabeb17ea79ca"
+checksum_source = "mise-versions"
 url = "https://github.com/jdx/pitchfork/releases/download/v2.23.0/pitchfork-x86_64-unknown-linux-gnu.tar.gz"
 url_api = "https://api.github.com/repos/jdx/pitchfork/releases/assets/530647237"
 
@@ -329,28 +341,3 @@ url_api = "https://api.github.com/repos/jdx/pitchfork/releases/assets/530652428"
 checksum = "sha256:f531f4c3449d757bb8e300a7b190dad40cc9aa9946612bfd10f28391a96c2711"
 url = "https://github.com/jdx/pitchfork/releases/download/v2.23.0/pitchfork-x86_64-pc-windows-msvc.zip"
 url_api = "https://api.github.com/repos/jdx/pitchfork/releases/assets/530657294"
-
-[[tools.resvg]]
-version = "0.48.1"
-backend = "aqua:linebender/resvg"
-specifiers = ["0.48.1"]
-
-[tools.resvg."platforms.linux-x64"]
-checksum = "sha256:fa8c26495a187e592c501db15bf9e8a9fdc051d4b2b336b39703d5b59f912b9d"
-url = "https://github.com/linebender/resvg/releases/download/v0.48.1/resvg-linux-x86_64.tar.gz"
-url_api = "https://api.github.com/repos/linebender/resvg/releases/assets/498966811"
-
-[tools.resvg."platforms.linux-x64-musl"]
-checksum = "sha256:fa8c26495a187e592c501db15bf9e8a9fdc051d4b2b336b39703d5b59f912b9d"
-url = "https://github.com/linebender/resvg/releases/download/v0.48.1/resvg-linux-x86_64.tar.gz"
-url_api = "https://api.github.com/repos/linebender/resvg/releases/assets/498966811"
-
-[tools.resvg."platforms.macos-arm64"]
-checksum = "sha256:0135923e443863db251a26bd78eabc6efb4b59d67b8cdc5469e3e1da26bc0ce2"
-url = "https://github.com/linebender/resvg/releases/download/v0.48.1/resvg-macos-x86_64.zip"
-url_api = "https://api.github.com/repos/linebender/resvg/releases/assets/498967669"
-
-[tools.resvg."platforms.macos-x64"]
-checksum = "sha256:0135923e443863db251a26bd78eabc6efb4b59d67b8cdc5469e3e1da26bc0ce2"
-url = "https://github.com/linebender/resvg/releases/download/v0.48.1/resvg-macos-x86_64.zip"
-url_api = "https://api.github.com/repos/linebender/resvg/releases/assets/498967669"
