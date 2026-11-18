@@ -91,9 +91,9 @@ url = "https://github.com/aubepkg/aube/releases/download/v1.29.1/aube-v1.29.1-x8
 url_api = "https://api.github.com/repos/aubepkg/aube/releases/assets/479769257"
 
 [[tools."cargo:resvg"]]
-version = "0.47.0"
+version = "0.50.0"
 backend = "cargo:resvg"
-specifiers = ["0.47.0"]
+specifiers = ["0.50.0"]
 
 [tools."cargo:resvg".options]
 features = "text system-fonts memmap-fonts raster-images"
